@@ -1,5 +1,6 @@
-package org.fossasia.openevent;
+package org.fossasia.openevent.activities;
 
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
@@ -9,6 +10,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.support.v4.widget.DrawerLayout;
 
+import org.fossasia.openevent.NavigationDrawerFragment;
+import org.fossasia.openevent.R;
 import org.fossasia.openevent.fragments.MapFragment;
 import org.fossasia.openevent.fragments.SpeakerlistFragment;
 import org.fossasia.openevent.fragments.SponsorsFragment;
@@ -17,6 +20,11 @@ import org.fossasia.openevent.fragments.TracksFragment;
 
 public class MainActivity extends ActionBarActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks {
+
+    public static final int FRAGMENT_TRACKS = 0;
+    public static final int FRAGMENT_SPEAKERS = 1;
+    public static final int FRAGMENT_SPONSORS = 2;
+    public static final int FRAGMENT_MAP = 3;
 
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
@@ -49,16 +57,16 @@ public class MainActivity extends ActionBarActivity
         FragmentManager fragmentManager = getSupportFragmentManager();
         Fragment newFragment;
         switch (position) {
-            case 3: //Map
+            case FRAGMENT_MAP: //Map
                 newFragment = MapFragment.newInstance();
                 break;
-            case 2: //Sponsors
+            case FRAGMENT_SPONSORS: //Sponsors
                 newFragment = SponsorsFragment.newInstance();
                 break;
-            case 1: //Speakers
+            case FRAGMENT_SPEAKERS: //Speakers
                 newFragment = SpeakerlistFragment.newInstance();
                 break;
-            case 0: //Tracks
+            case FRAGMENT_TRACKS: //Tracks
             default:
                 newFragment = TracksFragment.newInstance();
                 break;
@@ -69,17 +77,17 @@ public class MainActivity extends ActionBarActivity
     }
 
     public void onSectionAttached(int number) {
-        switch (number) {
-            case 1:
+        switch (number-1) {
+            case FRAGMENT_TRACKS:
                 mTitle = getString(R.string.title_section_tracks);
                 break;
-            case 2:
+            case FRAGMENT_SPEAKERS:
                 mTitle = getString(R.string.title_section_speakerlist);
                 break;
-            case 3:
+            case FRAGMENT_SPONSORS:
                 mTitle = getString(R.string.title_section_sponsors);
                 break;
-            case 4:
+            case FRAGMENT_MAP:
                 mTitle = getString(R.string.title_section_map);
                 break;
         }
@@ -115,6 +123,8 @@ public class MainActivity extends ActionBarActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            Intent i = new Intent(getApplicationContext(), SettingsActivity.class);
+            startActivity(i);
             return true;
         }
 
