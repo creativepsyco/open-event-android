@@ -1,6 +1,8 @@
 package org.fossasia.openevent.data;
 
 
+import android.database.DatabaseUtils;
+
 import org.fossasia.openevent.dbutils.DbContract;
 
 
@@ -66,8 +68,15 @@ public class Microlocation {
 
 
     public String generateSql() {
-        String query_normal = "INSERT INTO %s VALUES ('%d', '%s', '%f', '%f', '%d');";
-        String query = String.format(query_normal, DbContract.Microlocation.TABLE_NAME, id, name, latitude, longitude, floor);
+        String query_normal = "INSERT INTO %s VALUES ('%d', %s, '%f', '%f', '%d');";
+        String query = String.format(
+                query_normal,
+                DbContract.Microlocation.TABLE_NAME,
+                id,
+                DatabaseUtils.sqlEscapeString(name),
+                latitude,
+                longitude,
+                floor);
         return query;
     }
 }

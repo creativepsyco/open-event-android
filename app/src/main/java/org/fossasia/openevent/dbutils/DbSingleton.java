@@ -67,6 +67,7 @@ public class DbSingleton {
 
         ArrayList<Session> sessions = new ArrayList<>();
         Session s;
+        Log.d("session","cursor done");
 
         cur.moveToFirst();
         while (!cur.isAfterLast()) {
@@ -88,13 +89,13 @@ public class DbSingleton {
             cur.moveToNext();
         }
         cur.close();
+        Log.d("speakerlist ", sessions.size() + "");
         return sessions;
     }
 
     public Session getSessionById(int id) throws ParseException {
         getReadOnlyDatabase();
-        String selection = SELECT_ALL + DbContract.Sessions.TABLE_NAME +
-                WHERE + DbContract.Sessions.ID + EQUAL + id;
+        String selection = DbContract.Sessions.ID + EQUAL + id;
         Cursor cursor = mDb.query(
                 DbContract.Sessions.TABLE_NAME,
                 DbContract.Sessions.FULL_PROJECTION,
@@ -168,6 +169,7 @@ public class DbSingleton {
             Log.d("singl", s.getName());
         }
         cur.close();
+        mDb.close();
         return speakers;
     }
 
@@ -198,19 +200,17 @@ public class DbSingleton {
                     cursor.getInt(cursor.getColumnIndex(DbContract.Versions.VER_MICROLOCATIONS))
             );
             cursor.close();
+            mDb.close();
             return currentVersion;
 
         } else {
             return null;
         }
-
-
     }
 
     public Speaker getSpeakerById(int id) {
         getReadOnlyDatabase();
-        String selection = SELECT_ALL + DbContract.Sessions.TABLE_NAME +
-                WHERE + DbContract.Speakers.ID + EQUAL + id;
+        String selection = DbContract.Speakers.ID + EQUAL + id;
         Cursor cursor = mDb.query(
                 DbContract.Sessions.TABLE_NAME,
                 DbContract.Sessions.FULL_PROJECTION,
