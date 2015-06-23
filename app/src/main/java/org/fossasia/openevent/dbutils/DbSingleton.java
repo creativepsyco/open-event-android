@@ -5,11 +5,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
-import org.fossasia.openevent.data.Session;
-import org.fossasia.openevent.data.Speaker;
-import org.fossasia.openevent.data.Sponsor;
-import org.fossasia.openevent.data.Track;
-import org.fossasia.openevent.data.Version;
+import org.fossasia.openevent.data.*;
 
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -20,19 +16,40 @@ import java.util.List;
  */
 public class DbSingleton {
     private static final String ASCENDING = " ASC";
+
     private static final String DESCENDING = " DESC";
+
     private static final String SELECT_ALL = "SELECT * FROM ";
+
     private static final String WHERE = " WHERE ";
+
     private static final String EQUAL = " == ";
+
     private static DbSingleton mInstance;
+
     private static Context mContext;
+
     private static DbHelper mDbHelper;
+
     private SQLiteDatabase mDb;
 
     private DbSingleton(Context context) {
         mContext = context;
         mDbHelper = new DbHelper(mContext);
 
+    }
+
+    /**
+     * Only Exposed for testing purposes, either way Singletons suck.
+     *
+     * @param mDb     the readable/writable database
+     * @param context A sane context (Application context please)
+     * @param helper  A DB Helper
+     */
+    public DbSingleton(SQLiteDatabase mDb, Context context, DbHelper helper) {
+        this.mDb = mDb;
+        mContext = context;
+        mDbHelper = helper;
     }
 
     public static void init(Context context) {
@@ -43,6 +60,16 @@ public class DbSingleton {
 
     public static DbSingleton getInstance() {
         return mInstance;
+    }
+
+    /**
+     * Injection method for setting up the singleton object
+     *
+     * @param singleton A {@link DbSingleton} object
+     * @see {@link DbSingleton#DbSingleton(SQLiteDatabase, Context, DbHelper)}
+     */
+    public static void setInstance(DbSingleton singleton) {
+        mInstance = singleton;
     }
 
     private void getReadOnlyDatabase() {
@@ -67,7 +94,7 @@ public class DbSingleton {
 
         ArrayList<Session> sessions = new ArrayList<>();
         Session s;
-        Log.d("session","cursor done");
+        Log.d("session", "cursor done");
 
         cur.moveToFirst();
         while (!cur.isAfterLast()) {

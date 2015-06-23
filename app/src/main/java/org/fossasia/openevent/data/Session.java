@@ -15,19 +15,30 @@ import java.text.ParseException;
 public class Session {
 
     int id;
+
     String title;
+
     String subtitle;
+
     @SerializedName("abstract")
     String summary;
+
     String description;
+
     @SerializedName("start_time")
     String startTime;
+
     @SerializedName("end_time")
     String endTime;
+
     String type;
+
     int track;
+
     String level;
+
     int[] speakers;
+
     @SerializedName("microlocation")
     int microlocations;
 

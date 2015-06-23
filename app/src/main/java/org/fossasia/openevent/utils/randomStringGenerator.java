@@ -8,6 +8,7 @@ import java.util.Random;
 public class randomStringGenerator {
     private static final String CHAR_LIST =
             "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
     private static final int RANDOM_STRING_LENGTH = 10;
 
     public String generateRandomString() {

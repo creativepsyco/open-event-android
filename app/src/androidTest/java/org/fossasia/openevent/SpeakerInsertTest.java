@@ -13,20 +13,35 @@ import org.fossasia.openevent.dbutils.DbHelper;
  */
 public class SpeakerInsertTest extends AndroidTestCase {
     private static int id;
+
     private static String name;
+
     private static String photo;
+
     private static String bio;
+
     private static String email;
+
     private static String web;
+
     private static String twitter;
+
     private static String facebook;
+
     private static String github;
+
     private static String linkedin;
+
     private static String organisation;
+
     private static String position;
+
     private static int[] session;
+
     private static String country;
+
     private static long speakerAssignId;
+
     private DbHelper db;
 
     @Override

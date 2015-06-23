@@ -10,8 +10,11 @@ import org.fossasia.openevent.dbutils.DbContract;
 public class Sponsor {
 
     int id;
+
     String name;
+
     String url;
+
     String logo;
 
     public Sponsor(int id, String name, String url, String logo) {

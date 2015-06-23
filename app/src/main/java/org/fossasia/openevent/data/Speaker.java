@@ -12,20 +12,33 @@ import org.fossasia.openevent.dbutils.DbContract;
 public class Speaker {
 
     int id;
+
     String name;
+
     String photo;
+
     @SerializedName("biography")
     String bio;
+
     String email;
+
     String web;
+
     String twitter;
+
     String facebook;
+
     String github;
+
     String linkedin;
+
     String organisation;
+
     String position;
+
     @SerializedName("sessions")
     int[] session;
+
     String country;
 
     public Speaker(int id, String name, String photo,

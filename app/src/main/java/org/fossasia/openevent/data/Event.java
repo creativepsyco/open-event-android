@@ -11,19 +11,30 @@ public class Event {
 
 
     int id;
+
     String name;
+
     String email;
+
     String color;
+
     String logo;
+
     @SerializedName("start_time")
     String start;
+
     @SerializedName("end_time")
     String end;
+
     float latitude;
+
     float longitude;
+
     @SerializedName("location_name")
     String locationName;
+
     String url;
+
     String slogan;
 
     public Event(int id, String name, String email, String color, String logo, String start,

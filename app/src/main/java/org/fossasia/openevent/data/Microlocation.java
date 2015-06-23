@@ -11,9 +11,13 @@ import org.fossasia.openevent.dbutils.DbContract;
  */
 public class Microlocation {
     int id;
+
     String name;
+
     float latitude;
+
     float longitude;
+
     int floor;
 
     public Microlocation(int id, String name, float latitude,
